@@ -7,13 +7,18 @@ import textwrap
 import time
 from gtts import gTTS
 import io
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 from test_inference import chatbot 
 with st.sidebar:
     st.header("Configuration")
     uploaded_file = st.file_uploader("Upload a file", type=["pdf", "txt"])
-    huggingface_api_key = st.text_input("Huggingface API Key", key="huggingface_api_key", type="password")
-    "[Get a Huggingface API key](https://huggingface.co/settings/tokens)"
+
+huggingface_api_key=os.getenv("hf_token")
+
+
 
 if "history" not in st.session_state:
     st.session_state.history = [] 
